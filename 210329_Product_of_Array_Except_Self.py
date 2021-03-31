@@ -27,22 +27,45 @@ class Solution():
     def product(self, lst:List[int]) -> int:
         product = 1
         for i in lst:
+            if i == 0: # 미리 product 단계에서 0인 경우를 continue 시켜줘서 필요없는 연산을 없앤다.
+                continue
             product *= i
         return product
 
     def productExceptSelf(self, nums:List[int]) -> List[int]:
-        
         answer = []
-        if nums.count(0) == 1:
-            nums.remove(0)
-            total_prod = 
-        else:
-            total_prod = self.product(nums)
+        total_prod = self.product(nums)
+        zero_cnt = 0
+        zero_idx = []
         for i in range(len(nums)):
-            if i == 0: # Edge Case : [-1, 1, 0, -3, 3]
-                answer.append()
+            if nums[i] == 0:
+                zero_cnt += 1
+                zero_idx.append(i)
+                answer.append(0)
             else:
-                answer.append(int(total_prod/i))
+                answer.append(int(total_prod/nums[i]))
+
+        if zero_cnt == 0:
+            return answer
+        elif zero_cnt == 1:
+            answer = [0 for _ in range(len(nums)-1)]
+            answer.insert(zero_idx[0], total_prod)
+            return answer
+        else:
+            answer = [0 for _ in range(len(nums))]
+            return answer
+
+
+        # zero_cnt = nums.count(0)
+        # if zero_cnt == 0: # Edge Case : [-1, 1, 0, -3, 3]
+        #     for i in range(len(nums)):
+        #         answer.append(int(total_prod/i))
+        # elif zero_cnt == 1:
+        #     nums.remove(0)
+            
+        # else:
+        #     answer = [0] for _ in range(len(nums))
+        
         return answer
         
 
