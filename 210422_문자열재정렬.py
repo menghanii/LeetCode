@@ -1,10 +1,10 @@
 string = input()
-digit = []
+digit = 0
 alpha = []
 for st in string:
     if st.isdigit():
-        digit.append(int(st))
+        digit += int(st)
     else:
         alpha.append(st)
 alpha.sort()
-print(''.join(alpha) + str(sum(digit)))
+print(''.join(alpha)+str(digit))

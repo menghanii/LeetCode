@@ -3,7 +3,7 @@
 value_list = list(map(int, list(input())))
 max_value = 0
 for v in value_list:
-    if max_value == 0:
+    if max_value == 0 or max_value == 1:
         max_value += v
     else:
         if v == 0 or v == 1:
