@@ -4,7 +4,7 @@
 num = input()
 lst = list(map(int, input().split()))
 def find_fix_point(start, end):
-    if start > end:
+    if start > end: # mid+-1 로 start index가 end index를 넘어가는 경우 : 종료조건
         return -1
     mid = (start+end) // 2
     if lst[mid] == mid:
