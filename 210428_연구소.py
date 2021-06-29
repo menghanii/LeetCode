@@ -1,8 +1,11 @@
 from itertools import combinations
 import copy
 import sys
+import time
+
 sys.stdin = open('input.txt','r')
 
+start = time.time()
 # map 만들기
 N, M = map(int,input().split())
 G = []
@@ -66,3 +69,6 @@ for zeros in combi:
     answers.append(area)
 
 print(max(answers))
+
+duration = time.time() - start 
+print(duration)
