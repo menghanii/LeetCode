@@ -12,5 +12,5 @@ for conference in conferences[1:]:
     start = conference[0]
     if reserved[-1][1] <= start:
         reserved.append(conference)
-print(len(reserved))
+print(len(reserved)) # 미완성
 
