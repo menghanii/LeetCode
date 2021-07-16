@@ -1,4 +1,4 @@
-#210712
+#210716 still not resolved
 def solution(numbers, target):
     size = len(numbers)
     answer = 0
