@@ -1,24 +1,40 @@
-from itertools import combinations
-# def solution(numbers, target): # numbers = [1,2,3,4,5]
-#     for i in range(len(numbers)):
-#     answer = 0
-#     sum_list = [sum(numbers)]
-#     for i in range(len(numbers)):
-#         plus = numbers[:len(numbers)-(i+1)]
-#         minus = [-j for j in numbers[len(numbers)-(i+1):]] # [-3, -4, -5]
-#         print(plus)
-#         print(minus)
-#         while minus:
-#             print(sum(plus) + sum(minus))
-#             sum_list.append(sum(plus) + sum(minus))        
-#             plus.append(minus.pop() * -1)
-#         print()
-#     return sum_list
+# 2진법을 활용한 풀이
+def solution(numbers, target):
+    n = len(numbers)
+    binary2plusminus = {'0': 1, '1': -1}
+    binaries = []
+    result = []
+    for i in range(2**n):
+        binary = bin(i)[2:]
+        binary = '0' * (n - len(binary)) + binary
+        binaries.append([binary2plusminus[b] for b in binary])
+    for b_list in binaries:
+        res = 0
+        for i, j in zip(numbers, b_list):
+            res += (i * j)
+        result.append(res)
+    return result.count(target)
 
-# print(solution([1,2,3,4,5], 3))
-numbers = [1,2,3,4,5]
-for i in range(1, len(numbers)+1):
-    combi = combinations([0,1,2,3,4], i)
-    for c in combi:
-        for i in range(len(c)):
-            print(-1 * numbers[c[i]])
+
+## 프로그래머스 dfs 풀이
+def solution(numbers, target):
+    result = 0
+    def dfs(num, level):
+        nonlocal result
+
+        if level == len(numbers):
+            if num == target:
+                result += 1
+            return
+
+        signs = [-num, num]
+        if level == 1:
+            for i in range(2):
+                dfs(signs[i] + numbers[level], level + 1)
+                dfs(signs[i] - numbers[level], level + 1)
+        else:
+            dfs(num + numbers[level], level + 1)
+            dfs(num - numbers[level], level + 1)
+
+    dfs(numbers[0], 1)
+    return result
